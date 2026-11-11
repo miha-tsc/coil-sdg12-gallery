@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Coil SDG 12 Gallery — a website dedicated to UN Sustainable Development Goal 12: Ensure sustainable consumption and production patterns." />
+  <title>SDG 12 · Responsible Consumption &amp; Production | Coil Gallery</title>
+  <style>
+    /* ============ Base / Template Styles ============ */
+    :root {
+      --sdg12: #BF8B2E;           /* Official SDG 12 color */
+      --sdg12-dark: #8a6220;
+      --sdg12-light: #f6e9d3;
+      --ink: #21262b;
+      --paper: #ffffff;
+      --muted: #5c6670;
+      --radius: 14px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, .08);
+      font-size: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 92%); margin-inline: auto; }
+
+    /* ============ Header / Nav ============ */
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--sdg12);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .8rem 0;
+    }
+    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 700; letter-spacing: .03em; }
+    .chip {
+      background: #fff; color: var(--sdg12-dark);
+      font-weight: 800; border-radius: 8px;
+      padding: .25rem .55rem; font-size: 1.05rem;
+    }
+    nav ul { display: flex; gap: 1.4rem; list-style: none; }
+    nav a { font-weight: 600; opacity: .92; transition: opacity .2s; }
+    nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* ============ Hero ============ */
+    .hero {
+      background: linear-gradient(135deg, var(--sdg12) 0%, var(--sdg12-dark) 100%);
+      color: #fff;
+      padding: 5.5rem 0 4.5rem;
+    }
+    .hero .kicker {
+      text-transform: uppercase; letter-spacing: .18em; font-size: .8rem;
+      font-weight: 700; opacity: .85; margin-bottom: 1rem;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.15; max-width: 22ch; }
+    .hero p.lead { margin-top: 1.25rem; max-width: 60ch; font-size: 1.1rem; opacity: .95; }
+    .cta-row { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: .8rem 1.6rem; border-radius: 999px;
+      font-weight: 700; transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-primary { background: #fff; color: var(--sdg12-dark); }
+    .btn-ghost { border: 2px solid rgba(255,255,255,.7); color: #fff; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+
+    /* ============ Sections ============ */
+    section { padding: 4.5rem 0; }
+    section:nth-of-type(even) { background: #faf7f1; }
+    .section-title { font-size: 1.9rem; margin-bottom: .5rem; }
+    .section-sub { color: var(--muted); max-width: 70ch; margin-bottom: 2.5rem; }
+
+    /* Targets grid */
+    .grid { display: grid; gap: 1.25rem; }
+    .grid.targets { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card {
+      background: var(--paper); border: 1px solid #eee3cf;
+      border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow);
+      transition: transform .2s ease;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card .num {
+      display: inline-block; font-weight: 800; color: var(--sdg12-dark);
+      background: var(--sdg12-light); border-radius: 8px; padding: .15rem .6rem;
+      font-size: .85rem; margin-bottom: .75rem;
+    }
+    .card h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+    .card p { font-size: .95rem; color: var(--muted); }
+
+    /* Facts band */
+    .facts { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: center; }
+    .fact .big { font-size: 2.4rem; font-weight: 800; color: var(--sdg12-dark); }
+    .fact p { color: var(--muted); font-size: .95rem; margin-top: .35rem; }
+
+    /* Actions checklist */
+    .actions-list { list-style: none; display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .actions-list li {
+      background: var(--paper); border-left: 5px solid var(--sdg12);
+      border-radius: 10px; padding: 1rem 1.2rem; box-shadow: var(--shadow);
+      font-weight: 500;
+    }
+
+    /* Gallery strip */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .tile {
+      aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden;
+      display: flex; align-items: flex-end;
+      background: linear-gradient(160deg, var(--sdg12-light), var(--sdg12));
+      box-shadow: var(--shadow); position: relative;
+    }
+    .tile span {
+      width: 100%; background: rgba(0,0,0,.45); color: #fff;
+      padding: .5rem .9rem; font-weight: 600; font-size: .9rem; backdrop-filter: blur(2px);
+    }
+
+    /* Footer */
+    footer.site {
+      background: var(--ink); color: #cfd4da; padding: 2.5rem 0; font-size: .9rem;
+    }
+    footer .foot { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    footer a { color: var(--sdg12-light); font-weight: 600; }
+
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hero { padding: 4rem 0 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site">
+    <div class="container nav">
+      <div class="brand">
+        <span class="chip">12</span>
+        <span>COIL · SDG&nbsp;12 Gallery</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#targets">Targets</a></li>
+          <li><a href="#facts">Facts</a></li>
+          <li><a href="#actions">Take Action</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="about">
+    <div class="container">
+      <p class="kicker">UN Sustainable Development Goal 12</p>
+      <h1>Ensure sustainable consumption and production patterns</h1>
+      <p class="lead">
+        SDG 12 calls for “doing more and better with less”, decoupling economic growth from
+        environmental degradation, improving quality of life, and reducing the ecological
+        footprint of our goods, food, energy and waste — now and for future generations.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#targets">Explore the Targets</a>
+        <a class="btn btn-ghost" href="#actions">What can I do?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Targets ===== -->
+  <section id="targets">
+    <div class="container">
+      <h2 class="section-title">The 12.x Targets</h2>
+      <p class="section-sub">
+        Goal 12 is made up of science-backed targets covering waste, pollution, natural-resource
+        management, corporate reporting and sustainable public procurement.
+      </p>
+      <div class="grid targets">
+        <article class="card"><span class="num">12.1</span><h3>10-Year Framework</h3><p>Implement the 10-Year Framework of Programmes on Sustainable Consumption and Production Patterns, all countries taking action.</p></article>
+        <article class="card"><span class="num">12.2</span><h3>Natural Resources</h3><p>Achieve the sustainable management and efficient use of natural resources by 2030.</p></article>
+        <article class="card"><span class="num">12.3</span><h3>Food Waste</h3><p>Halve per-capita global food waste at retail and consumer level, and reduce food losses along production and supply chains.</p></article>
+        <article class="card"><span class="num">12.4</span><h3>Chemicals &amp; Waste</h3><p>Achieve environmentally sound management of chemicals and all wastes throughout their life cycle, reducing releases to air, water and soil.</p></article>
+        <article class="card"><span class="num">12.5</span><h3>Reduce, Reuse, Recycle</h3><p>Substantially reduce waste generation through prevention, reduction, recycling and reuse.</p></article>
+        <article class="card"><span class="num">12.6</span><h3>Corporate Reporting</h3><p>Encourage companies — especially large and transnational ones — to adopt sustainable practices and integrate sustainability into their reports.</p></article>
+        <article class="card"><span class="num">12.7</span><h3>Public Procurement</h3><p>Promote sustainable public procurement practices following policies and priorities.</p></article>
+        <article class="card"><span class="num">12.8</span><h3>Education for All</h3><p>Ensure people everywhere have the information and awareness for sustainable development and lifestyles in harmony with nature.</p></article>
+        <article class="card"><span class="num">12.a</span><h3>Support Developing Countries</h3><p>Strengthen scientific and technological capacity for developing countries to move toward more sustainable consumption and production.</p></article>
+        <article class="card"><span class="num">12.b</span><h3>Sustainable Tourism</h3><p>Develop and implement tools to monitor sustainable tourism that creates jobs and promotes local culture and products.</p></article>
+        <article class="card"><span class="num">12.c</span><h3>Fossil-Fuel Subsidies</h3><p>Rationalize inefficient fossil-fuel subsidies that encourage wasteful consumption by removing market distortions.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Facts ===== -->
+  <section id="facts">
+    <div class="container">
+      <h2 class="section-title">Why it matters</h2>
+      <p class="section-sub">Key facts about how we consume and produce (UN / UNEP figures).</p>
+      <div class="facts">
+        <div class="fact"><div class="big">~1/3</div><p>of all food produced globally is lost or wasted every year.</p></div>
+        <div class="fact"><div class="big">1.3 bn t</div><p>of food is wasted annually — while millions go hungry.</p></div>
+        <div class="fact"><div class="big">&gt;2 bn t</div><p>of municipal solid waste is generated each year, growing fast.</p></div>
+        <div class="fact"><div class="big">100 bn t</div><p>of materials are extracted from the Earth yearly — tripled in 40 years.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Actions ===== -->
+  <section id="actions">
+    <div class="container">
+      <h2 class="section-title">Take Action</h2>
+      <p class="section-sub">Small everyday choices scale into systemic change. Start with these:</p>
+      <ul class="actions-list">
+        <li>🛒 Buy only what you need — plan meals and shopping lists.</li>
+        <li>♻️ Follow the hierarchy: Refuse → Reduce → Reuse → Recycle → Rot.</li>
+        <li>🍽️ Compost food scraps and store leftovers wisely.</li>
+        <li>👕 Choose quality over quantity; repair, swap and buy second-hand.</li>
+        <li>⚡ Switch to efficient appliances and renewable energy providers.</li>
+        <li>💧 Save water — shorter showers, full loads, fix leaks.</li>
+        <li>🏷️ Support brands with transparent, sustainable supply chains.</li>
+        <li>📣 Speak up — vote, advocate and share what you learn.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Gallery ===== -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">Visual themes for this COIL gallery — replace these placeholder tiles with your project photos or student artwork.</p>
+      <div class="gallery">
+        <div class="tile"><span>Zero-Waste Living</span></div>
+        <div class="tile"><span>Circular Fashion</span></div>
+        <div class="tile"><span>Food Systems</span></div>
+        <div class="tile"><span>Repair Cafés</span></div>
+        <div class="tile"><span>Sustainable Tourism</span></div>
+        <div class="tile"><span>Eco Design</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site">
+    <div class="container foot">
+      <p>© 2026 Coil SDG 12 Gallery · Built for a COIL collaboration project.</p>
+      <p>Learn more at <a href="https://sdgs.un.org/goals/goal12" target="_blank" rel="noopener">UN SDG 12</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
